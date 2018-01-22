@@ -6,7 +6,7 @@ defmodule PhoenixPubsubConduitAmqp.Mixfile do
       app: :phoenix_pubsub_conduit_amqp,
       version: "0.1.0",
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
@@ -14,16 +14,16 @@ defmodule PhoenixPubsubConduitAmqp.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {PhoenixPubsubConduitAmqp.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:conduit_amqp, "~> 0.4.3"},
+      {:recon, "~> 2.3"}
     ]
   end
 end
