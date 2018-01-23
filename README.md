@@ -125,6 +125,14 @@ defmodule MyApp.Broker do
 end
 ```
 
+In this example, server A would create a queue `server_A` based on it's hostname, that is bound to
+the `fanout` exchange `phoenix.pubsub`. When a message is broadcast, due to some external event, it
+will be published using `phoenix_pubsub_broadcast` and publish to the `phoenix.pubsub` exchange.
+The exchange will then publish the message to every queue bound to it. For server A, that means
+it's `server_A` queue, where it is read and passed to the `Phoenix.PubSub.ConduitAMQP.Subscriber`.
+The `Phoenix.PubSub.ConduitAMQP.Subscriber`, then passes it off to `Phoenix.PubSub` which handles
+everything within the server.
+
 See [ConduitAMQP](https://github.com/conduitframework/conduit_amqp) and
 [Conduit](https://github.com/conduitframework/conduit) for more about configuring a broker.
 
